@@ -106,6 +106,8 @@ extern int sys_uptime(void);
 extern int sys_sem_init(void);
 extern int sys_sem_acquire(void);
 extern int sys_sem_release(void);
+extern int sys_pickup(void);
+extern int sys_putdown(void);
 
 static int (*syscalls[])(void) = {
 [SYS_fork]    sys_fork,
@@ -132,6 +134,8 @@ static int (*syscalls[])(void) = {
 [SYS_sem_init] sys_sem_init,
 [SYS_sem_acquire] sys_sem_acquire,
 [SYS_sem_release] sys_sem_release,
+[SYS_pickup] sys_pickup,
+[SYS_putdown] sys_putdown,
 };
 
 void
