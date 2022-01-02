@@ -560,7 +560,7 @@ sem_init(int i, int v)
 }
 
 void
-sem_aquire(int i)
+sem_acquire(int i)
 {
   acquire(&semaphores[i].lock);
 
