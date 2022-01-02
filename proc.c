@@ -547,7 +547,7 @@ procdump(void)
 }
 
 
-int
+void
 sem_init(int i, int v)
 {
   semaphores[i].max_proc = v;
@@ -559,8 +559,8 @@ sem_init(int i, int v)
 
 }
 
-int
-semaphore_aquire(int i)
+void
+sem_aquire(int i)
 {
   acquire(&semaphores[i].lock);
 
@@ -577,8 +577,8 @@ semaphore_aquire(int i)
   release(&semaphores[i].lock);
 }
 
-int
-semaphore_release(int i)
+void
+sem_release(int i)
 {
   acquire(&semaphores[i].lock);
   
