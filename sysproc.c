@@ -122,3 +122,19 @@ sys_sem_release(void)
   sem_release(i);
   return;
 }
+
+int sys_pickup(void){
+  int i;
+  if (argint(0, &i) < 0)
+      return -1;
+  pickup(i);
+  return 0;
+}
+
+int sys_putdown(void){
+  int i;
+  if (argint(0, &i) < 0)
+      return -1;
+  putdown(i);
+  return 0;
+}

@@ -123,6 +123,8 @@ void            yield(void);
 void             sem_init(int, int);
 void             sem_acquire(int);
 void             sem_release(int);
+void            pickup(int);
+void            putdown(int);
 
 // swtch.S
 void            swtch(struct context**, struct context*);

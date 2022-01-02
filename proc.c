@@ -593,3 +593,44 @@ sem_release(int i)
   }
   release(&semaphores[i].lock);
 }
+
+int state[5]={2,2,2,2,2};
+const int HUNGRY=0;
+const int EATING=1;
+const int THINKING=2;
+
+struct semaphore statelock;
+
+void test(int num)
+{
+    if (state[num] == HUNGRY && state[(num+4)%5] != EATING && state[(num+1)%5] != EATING) {
+          state[num] = EATING;
+          cprintf("Philosopher %d picking spoon %d and %d\n",num + 1, (num)%5+1, (num+1)%5 + 1);
+          cprintf("Philosopher %d is Eating\n", num + 1);
+          sem_release(num);
+    }
+}
+
+void pickup(int num)
+{
+ 
+    acquire(&statelock.lock);
+    state[num] = HUNGRY;
+    cprintf("Philosopher %d is Hungry\n", num + 1);
+    test(num);
+    release(&statelock.lock);
+    if(state[num]!=EATING)
+      sem_acquire(num);
+}
+ 
+// put down chopsticks
+void putdown(int num)
+{
+    acquire(&statelock.lock);
+    state[num] = THINKING;
+    cprintf("Philosopher %d putting spoon %d and %d down\n",num + 1, (num)%5+1, (num+1)%5 + 1);
+    cprintf("Philosopher %d is thinking\n", num + 1);
+    test((num+4)%5);
+    test((num+1)%5);
+    release(&statelock.lock);
+}

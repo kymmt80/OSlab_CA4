@@ -23,6 +23,12 @@ int getpid(void);
 char* sbrk(int);
 int sleep(int);
 int uptime(void);
+void sem_init(int,int);
+void sem_acquire(int);
+void sem_release(int);
+void pickup(int);
+void putdown(int);
+
 
 // ulib.c
 int stat(const char*, struct stat*);
